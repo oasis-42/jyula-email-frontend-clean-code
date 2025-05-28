@@ -58,3 +58,48 @@ Esta versão marca uma refatoração significativa do codebase com foco em Clean
 
 * Corrigida a estrutura de roteamento em `App.tsx` para evitar conflitos e garantir que os layouts corretos sejam aplicados às sub-rotas de `/app`.
 * Consistência no uso do `MonacoEditorComponent` nas páginas `createTemplates.tsx` e `viewerTemplate.tsx`.
+
+- Arquivo de configuração `google_checks.xml` com regras de estilo do Google
+- Plugin Maven CheckStyle na versão 3.2.1
+- Verificação automática de estilo durante a fase de validação do Maven
+- Testes unitários para serviços e entidades principais:
+  - `SegmentServiceTest`: Testes para operações CRUD de segmentos
+  - `ContactServiceTest`: Testes para gerenciamento de contatos
+  - `CampaignServiceTest`: Testes para criação e envio de campanhas
+  - `UserServiceTest`: Testes para autenticação e gerenciamento de usuários
+
+### Modificado
+- Atualizado `pom.xml` para incluir:
+  - Dependência do CheckStyle na versão 10.12.5
+  - Configuração do plugin Maven CheckStyle
+  - Propriedade `checkstyle.version` para gerenciamento de versão
+- Melhorada a cobertura de testes:
+  - Adicionados testes para casos de erro e exceções
+  - Implementados testes para validações de negócio
+  - Adicionados testes para operações de banco de dados
+
+### Removido
+- Arquivo de configuração `checkstyle.xml` anterior
+- Testes redundantes e obsoletos
+
+### Detalhes Técnicos
+- Configurado limite de 100 caracteres por linha (padrão Google)
+- Implementadas regras para:
+  - Convenções de nomenclatura
+  - Importações
+  - Violações de tamanho (métodos, parâmetros)
+  - Espaçamento e formatação
+  - Documentação JavaDoc
+  - Números mágicos
+  - Modificadores de visibilidade
+- Adicionada validação automática durante o build do projeto
+- Implementação de testes:
+  - Uso de Mockito para mock de dependências
+  - Testes de integração com banco de dados em memória (H2)
+  - Cobertura de testes aumentada para ~70% do código
+  - Testes focados em:
+    - Validação de regras de negócio
+    - Tratamento de exceções
+    - Operações CRUD
+    - Integrações com serviços externos
+    - Segurança e autenticação 
