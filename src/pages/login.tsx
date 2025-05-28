@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // import axios from "axios";
 
-function Login({ onSuccessfulLogin }) {
+function LoginPage({ onSuccessfulLogin }) {
   const [formData, setFormData] = useState({
     email: "",
     senha: "",
@@ -142,4 +142,4 @@ function Login({ onSuccessfulLogin }) {
   );
 }
 
-export default Login;
+export default LoginPage;

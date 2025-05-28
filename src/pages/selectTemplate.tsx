@@ -4,7 +4,7 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function SelectTemplate() {
+function SelectTemplatePage() {
   const initialTemplateList = [
     { id: 1, name: "Template 1", content: "content", isFavorite: false, subject: "Assunto 1" },
     { id: 2, name: "Template 2", isFavorite: true, subject: "Assunto 2" },
@@ -138,4 +138,4 @@ function SelectTemplate() {
   );
 }
 
-export default SelectTemplate;
+export default SelectTemplatePage;

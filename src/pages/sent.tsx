@@ -1,6 +1,6 @@
 
-function Sent() {
+function SentPage() {
   return <div>enviados</div>;
 }
 
-export default Sent;
+export default SentPage;

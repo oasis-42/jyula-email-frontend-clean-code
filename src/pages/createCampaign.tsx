@@ -2,7 +2,7 @@ import { Divider, Typography, Box, TextField, Card, Button } from "@mui/material
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 
-function CreateCampaign() {
+function CreateCampaignPage() {
   const [campaignName, setCampaignName] = useState("");
   const [sendTo, setSendTo] = useState("");
   const [audienceList, setAudienceList] = useState<string[]>([]);
@@ -119,4 +119,4 @@ function CreateCampaign() {
   );
 }
 
-export default CreateCampaign;
+export default CreateCampaignPage;

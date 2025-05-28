@@ -5,7 +5,7 @@ import Alert from "@mui/material/Alert";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function ViewerMonacoTemplate() {
+function ViewerMonacoTemplatePage() {
   const [localName, setLocalName] = useState("");
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
@@ -138,4 +138,4 @@ function ViewerMonacoTemplate() {
   );
 }
 
-export default ViewerMonacoTemplate;
+export default ViewerMonacoTemplatePage;

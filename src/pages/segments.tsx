@@ -1,9 +1,9 @@
 
 
-function segments() {
+function SegmentsPage() {
   return (
     <div>segments</div>
   )
 }
 
-export default segments
+export default SegmentsPage

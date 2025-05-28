@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function Cadastro() {
+function RegisterPage() {
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -163,4 +163,4 @@ function Cadastro() {
   );
 }
 
-export default Cadastro;
+export default RegisterPage;

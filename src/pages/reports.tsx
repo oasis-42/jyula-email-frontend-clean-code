@@ -1,7 +1,7 @@
 import React from "react";
 
-function Reports() {
+function ReportsPage() {
   return <div>relatorios</div>;
 }
 
-export default Reports;
+export default ReportsPage;

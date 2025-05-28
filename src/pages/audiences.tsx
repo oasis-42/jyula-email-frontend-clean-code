@@ -16,7 +16,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
 
-function CreateCampaign() {
+function AudiencesPage() {
   const [initialContactList, setInitialContactList] = useState([
     { id: 1, nickname: "Contato 1", email: "teste01.contato@gmail.com" },
     { id: 2, nickname: "Contato 2", email: "teste02.contato@gmail.com" },
@@ -327,4 +327,4 @@ function CreateCampaign() {
   );
 }
 
-export default CreateCampaign;
+export default AudiencesPage;

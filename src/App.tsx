@@ -1,78 +1,87 @@
+// jyula-email-frontend-clean-code/src/App.tsx
 import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import DefaultLayout from "./layouts/DefaultLayout";
 import ToolBarLayout from "./layouts/ToolBarLayout";
-import CreateTemplates from "./pages/createTemplates";
-import ViewerMonacoTemplate from './pages/viewerTemplate';
-import SelectTemplate from "./pages/selectTemplate";
-import Segments from "./pages/segments";
-import Audience from "./pages/audiences";
-import Sent from "./pages/sent";
-import Favorites from "./pages/favorites";
-import Reports from "./pages/reports";
-import CreateCampaign from "./pages/createCampaign";
-import Login from "./pages/login";
-import Register from "./pages/register";
+import CreateTemplatesPage from "./pages/createTemplates"; // Nome do componente atualizado
+import ViewerMonacoTemplatePage from './pages/viewerTemplate'; // Nome do componente atualizado
+import SelectTemplatePage from "./pages/selectTemplate"; // Nome do componente atualizado
+import SegmentsPage from "./pages/segments"; // Nome do componente atualizado
+import AudiencesPage from "./pages/audiences"; // Nome do componente atualizado
+import SentPage from "./pages/sent"; // Nome do componente atualizado
+import FavoritesPage from "./pages/favorites"; // Nome do componente atualizado
+import ReportsPage from "./pages/reports"; // Nome do componente atualizado
+import CreateCampaignPage from "./pages/createCampaign"; // Nome do componente atualizado
+import LoginPage from "./pages/login"; // Nome do componente atualizado
+import RegisterPage from "./pages/register"; // Nome do componente atualizado
 import { useState } from 'react';
 
-export default function App() {
-  const [isAuthenticated, setAuthenticated] = useState(true);
+const ProtectedRoute: React.FC<{ isAuthenticated: boolean; children: JSX.Element }> = ({ isAuthenticated, children }) => {
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
 
-  const handleFakeLogin = () => {
-    setAuthenticated(true);
-    console.log(isAuthenticated);
+export default function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // Mock: true para testar rotas protegidas
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+    // Poderia navegar para '/app/selecionar-template' aqui também se desejado
+  };
+
+  const handleLogout = () => { // Exemplo de função de logout
+    setIsAuthenticated(false);
+    // Limpar tokens, etc.
   };
 
   return (
     <Router>
       <Routes>
+        {/* Rota raiz redireciona com base na autenticação */}
         <Route
           path="/"
           element={
             isAuthenticated ? (
-              <Navigate to="/app/selecionar-template" />
+              <Navigate to="/app/selecionar-template" replace />
             ) : (
-              <Navigate to="/login" />
+              <Navigate to="/login" replace />
             )
           }
         />
-        <Route path="/login" element={<Login onSuccessfulLogin={handleFakeLogin} />} />
-        <Route path="/cadastro" element={<Register />} />
+        <Route path="/login" element={<LoginPage onSuccessfulLogin={handleLoginSuccess} />} />
+        <Route path="/cadastro" element={<RegisterPage />} />
+
+        {/* Rotas protegidas sob /app */}
         <Route
-          path="/app/*"
+          path="/app"
           element={
-            isAuthenticated ? (
-              <DefaultLayout>
-                <Outlet />
-              </DefaultLayout>
-            ) : (
-              <Navigate to="/login" />
-            )
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Outlet />
+            </ProtectedRoute>
           }
         >
-          <Route path="selecionar-template" element={<SelectTemplate />} />
-          <Route path="segmentos" element={<Segments />} />
-          <Route path="audiencia" element={<Audience />} />
-          <Route path="enviados" element={<Sent />} />
-          <Route path="favoritos" element={<Favorites />} />
-          <Route path="relatorios" element={<Reports />} />
-        </Route>
+          {/* Rotas com DefaultLayout */}
+          <Route element={<DefaultLayout><Outlet /></DefaultLayout>}>
+            <Route path="selecionar-template" element={<SelectTemplatePage />} />
+            <Route path="segmentos" element={<SegmentsPage />} />
+            <Route path="audiencia" element={<AudiencesPage />} />
+            <Route path="enviados" element={<SentPage />} />
+            <Route path="favoritos" element={<FavoritesPage />} />
+            <Route path="relatorios" element={<ReportsPage />} />
+          </Route>
 
-        <Route
-  path="/app/*"
-  element={
-    isAuthenticated ? (
-      <ToolBarLayout>
-        <Outlet />
-      </ToolBarLayout>
-    ) : (
-      <Navigate to="/login" />
-    )
-  }
->
-  <Route path="criar-templates" element={<CreateTemplates />} />
-  <Route path="visualizar-template" element={<ViewerMonacoTemplate />} />
-  <Route path="criar-campanha" element={<CreateCampaign />} />
-</Route>
+          {/* Rotas com ToolBarLayout */}
+          <Route element={<ToolBarLayout><Outlet /></ToolBarLayout>}>
+            <Route path="criar-templates" element={<CreateTemplatesPage />} />
+            <Route path="visualizar-template" element={<ViewerMonacoTemplatePage />} />
+            <Route path="criar-campanha" element={<CreateCampaignPage />} />
+          </Route>
+        </Route>
+        
+        {/* Rota para lidar com caminhos não encontrados */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
